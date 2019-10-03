@@ -18,7 +18,7 @@ for (const file of commandFiles) {
 }
 
 //Start bot things.
-bot.on('ready', () => {
+bot.once('ready', () => {
 	console.log('ready!');
 	bot.user.setPresence({game: {name: "Online!", type: 0}});
 });
@@ -27,7 +27,7 @@ bot.on('ready', () => {
 
 //Message goodness below.
 bot.on('message', async message => {
-	
+
 	if (message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/g);
@@ -35,7 +35,7 @@ bot.on('message', async message => {
 
 	const command = bot.commands.get(commandName)
 		|| bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-		
+
 	if (message.content.includes('\<:nickCringe:510507274096082945>')) {
 		message.react('510507274096082945');
 	}
@@ -86,4 +86,3 @@ bot.on('message', async message => {
 });
 
 bot.login(token);
-
