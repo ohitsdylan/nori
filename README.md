@@ -1,0 +1,2 @@
+# nori
+a discord bot
