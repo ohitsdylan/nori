@@ -85,4 +85,6 @@ bot.on('message', async message => {
 	}
 });
 
+process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
+
 bot.login(token);
