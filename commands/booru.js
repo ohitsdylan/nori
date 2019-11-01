@@ -15,7 +15,10 @@ module.exports = {
 				return message.channel.send('L-lewd!');
 			} else
 
-			message.channel.send(body[0].file_url);
+			message.channel.send('Character Tag: ' + body[0].tag_string_character + '\n' +
+			'Artist: ' + body[0].tag_string_artist + '\n' +
+			'Series/Franchise Copyright: ' + body[0].tag_string_copyright + '\n' +
+			body[0].file_url);
 		}
 		catch(error) {
 			message.channel.send('I couldn\'t find that!');
