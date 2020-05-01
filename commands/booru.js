@@ -8,7 +8,7 @@ module.exports = {
 		const fetch = require('node-fetch');
 		const tags = args[0];
 
-		const { body } = await fetch('https://danbooru.donmai.us/posts.json?random=true&limit=1&tags=${tags}').then(response => response.json());
+		const { body } = await fetch(`https://danbooru.donmai.us/posts.json?random=true&limit=1&tags=${tags}`).then(response => response.json());
 
 		if (body[0].rating !== 's') {
 			return message.channel.send('L-lewd!');
@@ -19,7 +19,9 @@ module.exports = {
 		'Series/Franchise Copyright: ' + body[0].tag_string_copyright + '\n' +
 		body[0].file_url);
 
-		catch(error) {
+		}
+
+		catch (error) {
 			message.channel.send('I couldn\'t find that!');
 		}
 	},
