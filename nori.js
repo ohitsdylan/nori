@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 const cooldowns = new Discord.Collection();
-const snekfetch = require('snekfetch');
+const fetch = require('node-fetch');
 
 //Load config file.
 const { prefix, token } = require('./config.json');
