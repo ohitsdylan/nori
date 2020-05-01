@@ -19,8 +19,6 @@ module.exports = {
 		'Series/Franchise Copyright: ' + body[0].tag_string_copyright + '\n' +
 		body[0].file_url);
 
-		}
-
 		catch (error) {
 			message.channel.send('I couldn\'t find that!');
 		}
