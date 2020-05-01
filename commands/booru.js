@@ -5,21 +5,20 @@ module.exports = {
 	cooldown: 5,
 	args: true,
 	async execute(message, args) {
-		const snekfetch = require('snekfetch');
+		const fetch = require('node-fetch');
 		const tags = args[0];
 
-		try {
-			const { body } = await snekfetch.get(`https://danbooru.donmai.us/posts.json?random=true&limit=1&tags=${tags}`);
+		const { body } = await fetch('https://danbooru.donmai.us/posts.json?random=true&limit=1&tags=${tags}').then(response => response.json());
 
-			if(body[0].rating !== 's') {
-				return message.channel.send('L-lewd!');
-			} else
+		if (body[0].rating !== 's') {
+			return message.channel.send('L-lewd!');
+		} else
 
-			message.channel.send('Character Tag: ' + body[0].tag_string_character + '\n' +
-			'Artist: ' + body[0].tag_string_artist + '\n' +
-			'Series/Franchise Copyright: ' + body[0].tag_string_copyright + '\n' +
-			body[0].file_url);
-		}
+		message.channel.send('Character Tag: ' + body[0].tag_string_character + '\n' +
+		'Artist: ' + body[0].tag_string_artist + '\n' +
+		'Series/Franchise Copyright: ' + body[0].tag_string_copyright + '\n' +
+		body[0].file_url);
+
 		catch(error) {
 			message.channel.send('I couldn\'t find that!');
 		}
