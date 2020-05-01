@@ -8,18 +8,22 @@ module.exports = {
 		const fetch = require('node-fetch');
 		const tags = args[0];
 
-		const { body } = await fetch(`https://danbooru.donmai.us/posts.json?random=true&limit=1&tags=${tags}`).then(response => response.json());
+		try {
 
-		if (body[0].rating !== 's') {
-			return message.channel.send('L-lewd!');
-		} else
+			const { body } = await fetch(`https://danbooru.donmai.us/posts.json?random=true&limit=1&tags=${tags}`).then(response => response.json());
 
-		message.channel.send('Character Tag: ' + body[0].tag_string_character + '\n' +
-		'Artist: ' + body[0].tag_string_artist + '\n' +
-		'Series/Franchise Copyright: ' + body[0].tag_string_copyright + '\n' +
-		body[0].file_url);
+			if (body[0].rating !== 's') {
+				return message.channel.send('L-lewd!');
+			} else
 
-		catch (error) {
+			message.channel.send('Character Tag: ' + body[0].tag_string_character + '\n' +
+			'Artist: ' + body[0].tag_string_artist + '\n' +
+			'Series/Franchise Copyright: ' + body[0].tag_string_copyright + '\n' +
+			body[0].file_url);
+
+		}
+
+		catch(error) {
 			message.channel.send('I couldn\'t find that!');
 		}
 	},
