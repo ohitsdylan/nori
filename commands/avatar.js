@@ -6,9 +6,9 @@ module.exports = {
 	cooldown: 1,
 	execute(message, args) {
 		if (!message.mentions.users.size) {
-			return message.channel.send(`${message.author.displayAvatarURL}`);
+			return message.channel.send(`<${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`);
 		}
 		const taggedUser = message.mentions.users.first();
-		message.channel.send(`${taggedUser.avatarURL}`);
+		message.channel.send(`<${taggedUser.displayAvatarURL({ format: "png", dynamic: true })}>`);
 	},
 };
