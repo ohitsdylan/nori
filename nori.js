@@ -13,6 +13,7 @@ const cooldowns = new Discord.Collection();
 const fetch = require('node-fetch');
 const fs = require('fs');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const schedule = require('node-schedule');
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
@@ -25,7 +26,16 @@ bot.once('ready', () => {
 	bot.user.setPresence({game: {name: "Online!", type: 0}});
 });
 
+//Delete 500 messages everyday at midnight from the #tmp channel
+let job = schedule.scheduleJob('0 0 * * *', function() {
+	const channel = bot.channels.cache.get('733877790914641991');
 
+	for (let i = 0; i < 5; i++) {
+		channel.bulkDelete(100) //Maximum allowed deletion is 100 messages
+			.then(messages => console.log(`Bulk deleted ${messages.size} messages`))
+			.catch(console.error);
+	}
+});
 
 //Message goodness below.
 bot.on('message', async message => {
