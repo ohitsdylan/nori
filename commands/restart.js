@@ -3,11 +3,11 @@ module.exports = {
 	description: 'R-restarts me...! I\'ll come back, right?',
 	cooldown: 10,
 	execute(message, args) {
-		if (!message.member.roles.some(r=>["admin"].includes(r.name)) ) {
+		if (message.member.id !== '312049352249966593') {
 			return message.channel.send('You\'re not my supervisor!');
 		}
 		else {
-			return message.channel.send('Restarting...!');
+			message.channel.send('Restarting...!');
 			process.exit(0);
 		}
 	},
