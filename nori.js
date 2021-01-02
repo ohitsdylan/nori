@@ -21,9 +21,9 @@ for (const file of commandFiles) {
 }
 
 //Start bot things.
-bot.once('ready', () => {
+bot.once('ready', async () => {
 	console.log('ready!');
-	bot.user.setPresence({game: {name: "Online!", type: 0}});
+    bot.user.setPresence({game: {name: "Online!", type: 0}});
 });
 
 //Delete 500 messages everyday at midnight from the #tmp channel
@@ -40,7 +40,7 @@ let job = schedule.scheduleJob('0 0 * * *', function() {
 //Message goodness below.
 bot.on('message', async message => {
 
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/g);
 	const commandName = args.shift().toLowerCase();
@@ -75,7 +75,7 @@ bot.on('message', async message => {
 			const timeLeft = (expirationTime - now) / 1000;
 			return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
 		}
-	}
+    }
 
 	timestamps.set(message.author.id, now);
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
